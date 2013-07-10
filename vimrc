@@ -111,3 +111,14 @@ else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 "set cc=80
+
+map <F7> :call SetColorColumn()<CR>
+function! SetColorColumn()
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+	execute "set cc+=".col_num
+    else
+	execute "set cc-=".col_num
+endif
+endfunction

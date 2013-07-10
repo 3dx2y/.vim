@@ -23,6 +23,6 @@ yum --enablerepo install -y pyflakes
 yum install -y ctags-etags
 fi
 
-git config --global user.name "Alex Yang"
-git config --global user.email "alex890714@gmail.com"
+git config --global user.name "Guangyu Suo"
+git config --global user.email "guangyu@unitedstack.com"
 git config --global core.excludesfile $HOME/.gitignore
