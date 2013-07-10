@@ -1,9 +1,13 @@
 My vim configuration folder.
 
-####Usage:
+###Installation
+    
+    $ ./install.sh
 
+####Usage:
 1. Make a ctags file
-  ctags -R *
+
+    $ ctags -R *
 
 2. F3 to open netree
 
