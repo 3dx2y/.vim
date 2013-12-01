@@ -25,6 +25,8 @@ hi Normal	guifg=White guibg=grey20
 
 " highlight groups
 hi Cursor	guibg=khaki guifg=slategrey
+hi CursorLine  ctermbg=0   cterm=none
+hi CursorColumn  ctermbg=0   cterm=none
 "hi CursorIM
 "hi Directory
 "hi DiffAdd

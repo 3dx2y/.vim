@@ -1,30 +1,56 @@
 " ===========================================================================
-" For AlexYang
+" For VIM
 " ===========================================================================
+
+
 " ====== 插件管理 ======
 call pathogen#infect()
 
 " ====== 基本设置 ======
+set ts=4
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+
+" 高亮显示搜索结果
+set hlsearch
+
+" 实时进行高亮查询
+set incsearch
+
+" 设置光标水平和垂直线
+set cursorline
+set cursorcolumn
+
 " 显示当前的行号列号：
 set ruler
+
 " 在状态栏显示正在输入的命令
 set showcmd
+
 " 显示行号：
 set number
+
 " 为方便复制，用<F2>开启/关闭行号显示:
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
-" 临时粘贴
-set pastetoggle=<F4>
+
+" 临时粘贴，解决缩进混乱的问题，进入paste模式
+" 或者使用快捷键："+p
+set pastetoggle=<F12>
+
 " 编码
 set fileencoding=utf-8
 set encoding=utf-8
+
 " 设置不自动折行
 set nowrap
+
 " 配色方案
 if ! has("gui_running") 
     set t_Co=256 
 endif 
 colorscheme anotherdark
+"colorscheme darkburn
 
 " 窗口切换快捷键修改
 map <c-j> <c-w>j
@@ -56,26 +82,22 @@ autocmd FileType bash setlocal foldmethod=indent
 
 " 默认展开所有代码
 set foldlevel=99
+
 " 空格键作为快捷键
 nnoremap <space> za
 
 " ====== 代码检查 ======
+"
 " 禁止PyFlakes使用QuickFix，这样在按下<F7>时会调用flake8，而有对于代码编辑时的错误仍能得到有效的提示
 let g:pyflakes_use_quickfix = 0
 " 如有需要，可设置忽略部分错误
 let g:flake8_ignore="E501,W801,W802"
-" Python文件使用Flake8
-" autocmd BufWritePost *.py call Flake8()
+" Python文件使用Flake8，当:w保存时，会自动进行检查
+autocmd BufWritePost *.py call Flake8()
 
-" ======= 代码补全 ======
-let g:acp_completeoptPreview = 1
-" 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-set completeopt+=longest
-" 离开插入模式后自动关闭预览窗口
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
- 
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+
 " 上下左右键的行为
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
@@ -94,6 +116,15 @@ let tagbar_width = 30
 map <silent> <F3> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', 'tags', '\.egg-info', '\.egg$']
 
+" ====== CommandT =====
+" 快捷键F打开CommandT
+map F :CommandT<CR>
+let g:CommandTMaxHeight=15
+let g:CommandTWildIgnore=&wildignore . ",**/*.egg-info/**,*.pyc,*.pyo,**/*.egg*/**"
+"set wildignore+=*.o,*.obj,.git,*.pyc,*pyo,**/*.egg-info/**,**/*.egg*/**
+let g:CommandTCancelMap='<Esc>'
+
+
 "进行版权声明的设置
 ""添加或更新头
 map <F6> :call AddTitle()<cr>'s
@@ -103,22 +134,15 @@ function AddTitle()
     echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
 endf
 
-" ====== 对齐线 ======
-let g:indent_guides_guide_size=1  " 宽度
-if exists('+colorcolumn')
-  set colorcolumn=80
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-"set cc=80
-
-map <F7> :call SetColorColumn()<CR>
+ 
+" ===== 垂直线 =====
+map <F9> :call SetColorColumn()<CR>
 function! SetColorColumn()
-    let col_num = virtcol(".")
+    let col_num = 80
     let cc_list = split(&cc, ',')
     if count(cc_list, string(col_num)) <= 0
-	execute "set cc+=".col_num
+        execute "set cc+=".col_num
     else
-	execute "set cc-=".col_num
-endif
+        execute "set cc-=".col_num
+    endif
 endfunction
