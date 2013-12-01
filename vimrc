@@ -124,6 +124,8 @@ let g:CommandTWildIgnore=&wildignore . ",**/*.egg-info/**,*.pyc,*.pyo,**/*.egg*/
 "set wildignore+=*.o,*.obj,.git,*.pyc,*pyo,**/*.egg-info/**,**/*.egg*/**
 let g:CommandTCancelMap='<Esc>'
 
+" ======vim-markdown=====
+let g:vim_markdown_folding_disabled=1
 
 "进行版权声明的设置
 ""添加或更新头
