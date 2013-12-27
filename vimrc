@@ -6,6 +6,12 @@
 " ====== 插件管理 ======
 call pathogen#infect()
 
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+imap jj <esc>
+
 " ====== 基本设置 ======
 set ts=4
 set expandtab
@@ -93,7 +99,13 @@ let g:pyflakes_use_quickfix = 0
 " 如有需要，可设置忽略部分错误
 let g:flake8_ignore="E501,W801,W802"
 " Python文件使用Flake8，当:w保存时，会自动进行检查
-autocmd BufWritePost *.py call Flake8()
+" autocmd BufWritePost *.py call Flake8()
+
+" For html and javascript
+let g:SimpleJsIndenter_BriefMode = 1
+let g:html_indent_script1 = "inc" 
+let g:html_indent_style1 = "inc"
+let g:html_indent_inctags = "html,body,head,tbody"
 
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
@@ -119,7 +131,7 @@ let NERDTreeIgnore = ['\.pyc$', 'tags', '\.egg-info', '\.egg$']
 " ====== CommandT =====
 " 快捷键F打开CommandT
 map F :CommandT<CR>
-let g:CommandTMaxHeight=15
+let g:CommandTMaxHeight=20
 let g:CommandTWildIgnore=&wildignore . ",**/*.egg-info/**,*.pyc,*.pyo,**/*.egg*/**"
 "set wildignore+=*.o,*.obj,.git,*.pyc,*pyo,**/*.egg-info/**,**/*.egg*/**
 let g:CommandTCancelMap='<Esc>'
