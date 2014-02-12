@@ -128,6 +128,9 @@ let tagbar_width = 30
 map <silent> <F3> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', 'tags', '\.egg-info', '\.egg$']
 
+" ===== plantuml =====
+let g:plantuml_executable_script='java -jar ~/.vim/bundle/plantuml-syntax/plantuml.jar'
+
 " ====== CommandT =====
 " 快捷键F打开CommandT
 map F :CommandT<CR>
