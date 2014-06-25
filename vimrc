@@ -41,8 +41,9 @@ set number
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 " 临时粘贴，解决缩进混乱的问题，进入paste模式
-" 或者使用快捷键："+p
-set pastetoggle=<F12>
+" 或者使用命令：
+" set paste or set nopaste
+set pastetoggle=<F10>
 
 " 编码
 set fileencoding=utf-8
@@ -72,7 +73,7 @@ autocmd FileType java setlocal et sta sw=4 sts=4
 autocmd FileType php setlocal et sta sw=4 sts=4
 autocmd FileType c setlocal et sta sw=4 sts=4
 autocmd FileType cpp setlocal et sta sw=4 sts=4
-autocmd FileType html setlocal et sta sw=4 sts=4
+autocmd FileType html setlocal et sta sw=2 sts=2
 autocmd FileType xml setlocal et sta sw=4 sts=4
 autocmd FileType bash setlocal et sta sw=4 sts=4
 
@@ -126,7 +127,7 @@ let tagbar_width = 30
 " ====== NerdTree ======
 " 打开 NerdTree
 map <silent> <F3> :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\.pyc$', 'tags', '\.egg-info', '\.egg$']
+let NERDTreeIgnore = ['\.pyc$', '\.egg-info', '\.egg$', '\.pyo']
 
 " ===== plantuml =====
 let g:plantuml_executable_script='java -jar ~/.vim/bundle/plantuml-syntax/plantuml.jar'
