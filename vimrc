@@ -117,6 +117,11 @@ inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
+"保证vim在reopen一个文件时定位到同一行
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 " ====== CTAGS ======
 set tags=tags;/
 
@@ -126,7 +131,7 @@ let tagbar_width = 30
 
 " ====== NerdTree ======
 " 打开 NerdTree
-map <silent> <F3> :NERDTreeToggle<CR>
+map <silent> <C-t> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', '\.egg-info', '\.egg$', '\.pyo']
 
 " ===== plantuml =====
@@ -147,9 +152,13 @@ let g:vim_markdown_folding_disabled=1
 ""添加或更新头
 map <F6> :call AddTitle()<cr>'s
 function AddTitle()
-    call append(0,"#!/usr/bin/python")
-    call append(1,"# -*- coding: utf-8 -*-")
-    echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
+    let lnum = line(".")
+    let indt = indent(lnum)
+    let space = ""
+    for i in range(indt)
+        let space .= " "
+    endfor
+    call append(lnum, space . "import pdb; pdb.set_trace()")
 endf
 
  
