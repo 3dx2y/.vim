@@ -65,6 +65,15 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+" 窗口调整大小
+" 将当前窗口增加/减少n行: Ctrl+w n +/-
+" 将当前窗口增加/减少n列: Ctrl+w n >/<
+" 恢复等宽等高：Ctrl+w =
+nmap J :resize -3<CR>
+nmap K :resize +3<CR>
+nmap H :vertical resize -3<CR>
+nmap L :vertical resize +3<CR>
+
 " ====== 自动检测文件类型并加载相应的设置 ======
 syntax on
 filetype plugin indent on
