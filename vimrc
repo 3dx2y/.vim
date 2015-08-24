@@ -6,10 +6,12 @@
 " ====== 插件管理 ======
 call pathogen#infect()
 
-inoremap <C-b> <Left>
-inoremap <C-f> <Right>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
+" 在Mac下把｀Ctrl-f｀映射到了｀Esc-f｀，是为了实现命令行以单词移动光标，导致的结果是
+" vim里面的`Ctrl-f`失效了，因此再做个映射把单独的一个`f`键映射到`Ctrl-f`，然后在vim
+" 里，就继续可以使用`Ctrl-f`来翻页了，同时也可以单独使用`f`来翻页。如果没有设置前面
+" `Ctrl-f`到`Esc-f`的映射，那可以把这个注释掉。`Ctrl-b`也是同样的道理。
+map f <c-f>
+map b <c-b>
 imap jj <esc>
 
 " ====== 基本设置 ======
@@ -20,6 +22,7 @@ set softtabstop=4
 
 " 高亮显示搜索结果
 set hlsearch
+map <C-n> :noh<CR>
 
 " 实时进行高亮查询
 set incsearch
@@ -35,7 +38,7 @@ set ruler
 set showcmd
 
 " 显示行号：
-set number
+" set number
 
 " 为方便复制，用<F2>开启/关闭行号显示:
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
@@ -69,6 +72,7 @@ map <c-h> <c-w>h
 " 将当前窗口增加/减少n行: Ctrl+w n +/-
 " 将当前窗口增加/减少n列: Ctrl+w n >/<
 " 恢复等宽等高：Ctrl+w =
+" 窗口最大化：Ctrl+w |
 nmap J :resize -3<CR>
 nmap K :resize +3<CR>
 nmap H :vertical resize -3<CR>
@@ -107,7 +111,8 @@ nnoremap <space> za
 " 禁止PyFlakes使用QuickFix，这样在按下<F7>时会调用flake8，而有对于代码编辑时的错误仍能得到有效的提示
 let g:pyflakes_use_quickfix = 0
 " 如有需要，可设置忽略部分错误
-let g:flake8_ignore="E501,W801,W802"
+" let g:flake8_ignore="W801,W802,H405,H904"
+let g:flake8_ignore="W801,W802"
 " Python文件使用Flake8，当:w保存时，会自动进行检查
 " autocmd BufWritePost *.py call Flake8()
 
