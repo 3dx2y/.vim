@@ -10,8 +10,8 @@ call pathogen#infect()
 " vim里面的`Ctrl-f`失效了，因此再做个映射把单独的一个`f`键映射到`Ctrl-f`，然后在vim
 " 里，就继续可以使用`Ctrl-f`来翻页了，同时也可以单独使用`f`来翻页。如果没有设置前面
 " `Ctrl-f`到`Esc-f`的映射，那可以把这个注释掉。`Ctrl-b`也是同样的道理。
-map f <c-f>
-map b <c-b>
+" map f <c-f>
+" map b <c-b>
 imap jj <esc>
 
 " ====== 基本设置 ======
@@ -187,3 +187,21 @@ function! SetColorColumn()
         execute "set cc-=".col_num
     endif
 endfunction
+
+" 最大化当前窗口
+function! Zoom ()
+    " check if is the zoomed state (tabnumber > 1 && window == 1)
+    if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
+        let l:cur_winview = winsaveview()
+        let l:cur_bufname = bufname('')
+        tabclose
+        " restore the view
+        if l:cur_bufname == bufname('')
+            call winrestview(cur_winview)
+        endif
+    else
+        tab split
+    endif
+endfunction
+let mapleader = "\<Space>"
+nmap <leader>z :call Zoom()<CR>
