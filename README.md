@@ -4,6 +4,12 @@ Vim configuration
 
 $ ./install.sh
 
+On Ubuntu:
+> apt-get install ctags -y
+
+On CentOS:
+> yum install ctags -y
+
 # Usage:
 
 1. Make a ctags file
