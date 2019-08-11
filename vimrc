@@ -19,6 +19,7 @@ set ts=4
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+set backspace=indent,eol,start
 
 " 高亮显示搜索结果
 set hlsearch
@@ -89,6 +90,7 @@ autocmd FileType cpp setlocal et sta sw=4 sts=4
 autocmd FileType html setlocal et sta sw=2 sts=2
 autocmd FileType xml setlocal et sta sw=4 sts=4
 autocmd FileType bash setlocal et sta sw=4 sts=4
+autocmd FileType puppet setlocal et sta sw=4 sts=4
 
 " ====== 代码折叠 ======
 autocmd FileType python setlocal foldmethod=indent
@@ -105,16 +107,6 @@ set foldlevel=99
 
 " 空格键作为快捷键
 nnoremap <space> za
-
-" ====== 代码检查 ======
-"
-" 禁止PyFlakes使用QuickFix，这样在按下<F7>时会调用flake8，而有对于代码编辑时的错误仍能得到有效的提示
-let g:pyflakes_use_quickfix = 0
-" 如有需要，可设置忽略部分错误
-" let g:flake8_ignore="W801,W802,H405,H904"
-let g:flake8_ignore="W801,W802"
-" Python文件使用Flake8，当:w保存时，会自动进行检查
-" autocmd BufWritePost *.py call Flake8()
 
 " For html and javascript
 let g:SimpleJsIndenter_BriefMode = 1
@@ -205,3 +197,6 @@ function! Zoom ()
 endfunction
 let mapleader = "\<Space>"
 nmap <leader>z :call Zoom()<CR>
+
+" vim-go
+let g:go_def_mapping_enabled = 0
